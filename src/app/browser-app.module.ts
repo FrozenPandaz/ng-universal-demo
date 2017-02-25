@@ -7,7 +7,9 @@ import { BrowserUniversalCacheModule } from '../modules/universal-cache/browser-
 @NgModule({
 	bootstrap: [ AppComponent ],
 	imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({
+      appId: 'my-app-id'
+    }),
     BrowserUniversalCacheModule,
     AppModule
 	]

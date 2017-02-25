@@ -13,7 +13,7 @@ import { HomeView } from './home/home-view.component';
     HttpModule,
 		RouterModule.forRoot([
 			{ path: '', component: HomeView, pathMatch: 'full'},
-			{ path: 'lazy', loadChildren: './+lazy/lazy.module#LazyModule'}
+			// { path: 'lazy', loadChildren: './+lazy/lazy.module#LazyModule'} // Currently seems broken
 		])
 	],
   providers: [
