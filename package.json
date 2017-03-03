@@ -4,12 +4,12 @@
   "main": "index.js",
   "repository": {},
   "scripts": {
-    "start": "npm run build && npm run server",
+    "start": "rm -rf src/ngfactory && npm run build && npm run server",
     "build": "webpack -p",
-    "prebuild": "npm run build:ngc",
+    "prebuild": "rm -rf src/ngfactory && npm run build:ngc",
     "build:ngc": "ngc",
     "server": "nodemon dist/server.js",
-    "prewatch": "npm run build:ngc",
+    "prewatch": "rm -rf src/ngfactory && npm run build:ngc",
     "watch": "webpack --watch"
   },
   "engines": {
