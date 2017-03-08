@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core'
 import { FactorialService } from './factorial.service';
 
 @Component({
-	selector: 'demo-app',
-	template: `
+  selector: 'app-root',
+  template: `
     <div [hidden]="computingFactorials == false" class="progress-bar">
       <div [style.width.%]="progress" class="progress"></div>
     </div>
@@ -13,14 +13,14 @@ import { FactorialService } from './factorial.service';
       <label>Compute the next {{numberOfFactorials}} factorials, starting on:</label>
       <input [(ngModel)]="firstFactorial" type="number" placeholder="Set the start number">
       <button (click)="computeFactorials()">Compute factorials</button>
-      <button (click)="cleanResults()" [disabled]="computingFactorials == true">Clean results</button>	
+      <button (click)="cleanResults()" [disabled]="computingFactorials == true">Clean results</button>  
     </div>
 
 
     <div class="items" *ngFor="let item of items">
       {{item}}
     </div>
-	`,
+  `,
   styles: [
     `
     div label{
