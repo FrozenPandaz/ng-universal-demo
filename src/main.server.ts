@@ -43,5 +43,5 @@ app.get('/data', (req, res) => {
 });
 
 app.listen(8000,() => {
-	console.log(`Listening at ${baseUrl}`);
+  console.log(`Listening at ${baseUrl}`);
 });

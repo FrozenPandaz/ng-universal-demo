@@ -30,11 +30,11 @@
     "@angular/platform-server": "^4.0.0-rc.2",
     "@angular/platform-webworker": "^4.0.0-rc.2",
     "@angular/router": "^4.0.0-rc.2",
+    "core-js": "2.4.1",
     "express": "^4.14.1",
     "rxjs": "^5.1.1",
     "xhr2": "^0.1.4",
-    "zone.js": "^0.7.7",
-    "core-js": "2.4.1"
+    "zone.js": "^0.7.7"
   },
   "devDependencies": {
     "@angular/compiler-cli": "^4.0.0-rc.2",
