@@ -14,6 +14,18 @@ module.exports = {
       {
         test: /\.ts$/,
         loader: '@ngtools/webpack',
+      },
+      {
+        test: /\.html$/,
+        use: 'raw-loader'
+      },
+      {
+        test: /\.css$/, 
+        use: 'raw-loader'
+      },
+      {
+        test: /\.json$/,
+        use: 'json-loader'
       }
     ]
   },
