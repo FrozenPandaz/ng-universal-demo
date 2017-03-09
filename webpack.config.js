@@ -26,7 +26,7 @@ module.exports = function (options, webpackOptions) {
     ]
   });
 
-  if (webpackOptions.p) {
+  if (options.aot) {
     clientConfig = webpackMerge({}, clientConfig, prodPartial);
   }
 

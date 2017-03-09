@@ -6,11 +6,7 @@
   "scripts": {
     "start": "npm run build && npm run server",
     "build": "webpack",
-    "build:aot": "webpack --env.aot --env.client & webpack --env.aot --env.server",
-    "build:prod": "webpack --env.aot --env.client -p & webpack --env.aot --env.server",
-    "prebuild": "npm run clean",
-    "prebuild:aot": "npm run clean",
-    "prebuild:prod": "npm run clean",
+    "build:prod": "rimraf dist; webpack --env.aot --env.client & webpack --env.aot --env.server",
     "clean": "rimraf dist",
     "server": "nodemon dist/server.js",
     "watch": "webpack --watch"
@@ -41,6 +37,8 @@
     "@ngtools/webpack": "^1.2.11",
     "@types/express": "^4.0.35",
     "@types/node": "^7.0.5",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "html-loader": "^0.4.5",
     "nodemon": "^1.11.0",
     "rimraf": "^2.6.1",
     "typescript": "^2.2.1",

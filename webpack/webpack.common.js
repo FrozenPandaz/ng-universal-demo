@@ -1,3 +1,6 @@
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
+const helpers = require('./helpers');
 /**
  * This is a common webpack config which is the base for all builds
  */
@@ -13,21 +16,23 @@ module.exports = {
     rules: [
       {
         test: /\.ts$/,
-        loader: '@ngtools/webpack',
+        use: '@ngtools/webpack',
       },
       {
         test: /\.html$/,
-        use: 'raw-loader'
+        use: 'hraw-loader'
       },
       {
-        test: /\.css$/, 
+        test: /\.css$/,
         use: 'raw-loader'
-      },
-      {
-        test: /\.json$/,
-        use: 'json-loader'
       }
     ]
   },
-  plugins: []
+  plugins: [
+    new webpack.ContextReplacementPlugin(
+      /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+      helpers.root('./src'),
+      {}
+    )
+  ]
 };
