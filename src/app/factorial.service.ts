@@ -10,7 +10,6 @@ export class FactorialService {
     Big.E_POS = 5;
   }
 
-
   private factorialize(n: number) {
     if (n === 0 || n === 1) {
         return 1;
@@ -20,10 +19,7 @@ export class FactorialService {
     }
   }
 
-
   public factorial(n: number) {
     return  this.factorialize(n).toPrecision(5);
   }
-
-
 }

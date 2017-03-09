@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core';
 import { FactorialService } from './factorial.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { FactorialService } from './factorial.service';
       <label>Compute the next {{numberOfFactorials}} factorials, starting on:</label>
       <input [(ngModel)]="firstFactorial" type="number" placeholder="Set the start number">
       <button (click)="computeFactorials()">Compute factorials</button>
-      <button (click)="cleanResults()" [disabled]="computingFactorials == true">Clean results</button>  
+      <button (click)="cleanResults()" [disabled]="computingFactorials == true">Clean results</button>
     </div>
 
 
@@ -74,11 +74,16 @@ import { FactorialService } from './factorial.service';
   ]
 })
 export class AppComponent implements OnInit {
-  items = [];
-  progress: number = 0;
-  computingFactorials: boolean = false;
-  firstFactorial: number = 700;
-  numberOfFactorials: number = 50;
+  // tslint:disable-next-line:no-inferrable-types
+  public items = [];
+  // tslint:disable-next-line:no-inferrable-types
+  public progress: number = 0;
+  // tslint:disable-next-line:no-inferrable-types
+  public computingFactorials: boolean = false;
+  // tslint:disable-next-line:no-inferrable-types
+  public firstFactorial: number = 700;
+  // tslint:disable-next-line:no-inferrable-types
+  public numberOfFactorials: number = 50;
 
   constructor(private factorialService: FactorialService) {}
 
@@ -97,7 +102,7 @@ export class AppComponent implements OnInit {
       setTimeout(this.getFactorialForN(i), 0);
     }
   }
-  
+
   private getFactorialForN(i: number) {
     return () => {
       let value = this.factorialService.factorial(i);
