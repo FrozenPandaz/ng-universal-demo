@@ -43,5 +43,9 @@
     "typescript": "2.2.1",
     "webpack": "2.2.1",
     "webpack-merge": "4.0.0"
+  },
+  "greenkeeper": {
+    "branchPrefix": "dep-update-",
+    "label": "dep-update"
   }
 }
