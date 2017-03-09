@@ -1,9 +1,9 @@
-const { resolve } = require('path');
+const path = require('path');
+const _root = path.resolve(__dirname, '..');
 
-function root(path) {
-  return resolve(__dirname, '..', path);
+function root(args) {
+  args = Array.prototype.slice.call(arguments, 0);
+  return path.join.apply(path, [_root].concat(args));
 }
 
-module.exports = {
-  root: root
-};
+exports.root = root;

@@ -1,14 +1,15 @@
-const { root } = require('./helpers');
-
-const { AotPlugin } = require('@ngtools/webpack');
+const webpack = require('webpack');
 
 /**
  * This is a client config which should be merged on top of common config
  */
 module.exports = {
-  entry: root('./src/main.browser.ts'),
+  entry: {
+    'client': './src/main.browser.ts',
+    'webworker': './src/main.webworker.ts'
+  },
   output: {
-    filename: 'client.js'
+    filename: '[name].js'
   },
   target: 'web'
 };

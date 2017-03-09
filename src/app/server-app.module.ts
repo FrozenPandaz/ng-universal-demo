@@ -10,7 +10,7 @@ import { TransferState } from '../modules/transfer-state/transfer-state';
   imports: [
     ServerModule,
     ServerTransferStateModule,
-	  AppModule
+    AppModule
   ]
 })
 export class ServerAppModule {

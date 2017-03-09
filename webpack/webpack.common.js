@@ -1,3 +1,5 @@
+const webpack = require('webpack');
+const helpers = require('./helpers');
 /**
  * This is a common webpack config which is the base for all builds
  */
@@ -13,9 +15,23 @@ module.exports = {
     rules: [
       {
         test: /\.ts$/,
-        loader: '@ngtools/webpack',
+        use: '@ngtools/webpack',
+      },
+      {
+        test: /\.html$/,
+        use: 'raw-loader'
+      },
+      {
+        test: /\.css$/,
+        use: 'raw-loader'
       }
     ]
   },
-  plugins: []
+  plugins: [
+    new webpack.ContextReplacementPlugin(
+      /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+      helpers.root('./src'),
+      {}
+    )
+  ]
 };
