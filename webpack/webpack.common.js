@@ -1,4 +1,3 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
 const helpers = require('./helpers');
 /**
@@ -20,7 +19,7 @@ module.exports = {
       },
       {
         test: /\.html$/,
-        use: 'hraw-loader'
+        use: 'raw-loader'
       },
       {
         test: /\.css$/,
