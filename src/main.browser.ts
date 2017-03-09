@@ -12,6 +12,9 @@ import { BrowserAppModule } from './app/browser-app.module';
 
 if (process.env.ENV === 'production') {
   enableProdMode();
+} else {
+  Error['stackTraceLimit'] = Infinity;
+  require('zone.js/dist/long-stack-trace-zone');
 }
 
 platformBrowserDynamic().bootstrapModule(BrowserAppModule);
