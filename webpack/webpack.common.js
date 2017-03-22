@@ -1,3 +1,5 @@
+const { root } = require('./helpers');
+
 /**
  * This is a common webpack config which is the base for all builds
  */
@@ -7,7 +9,7 @@ module.exports = {
     extensions: ['.ts', '.js']
   },
   output: {
-    path: 'dist'
+    path: root('dist')
   },
   module: {
     rules: [
