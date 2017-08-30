@@ -36,20 +36,30 @@ interface User {
         <h3>{{photo.title}}</h3>
       </li>
     </ul>
+    <code>{{resPost | json}}</code>
   `
 })
 export class LazyView implements OnInit {
 	users: Observable<Array<User>>;
 	photos;
+	resPost;
 	constructor(private http: TransferHttp, private httpClient: TransferHttpClient) { }
 	ngOnInit(){
 		this.users = this.http.get('http://jsonplaceholder.typicode.com/users').map(res => res);
 		this.httpClient.request('GET', 'http://jsonplaceholder.typicode.com/todos', {
       responseType: 'json'
     }).subscribe(res => {
-		  console.log(res);
+		  //console.log(res);
 		  this.photos = res;
     });
+		this.httpClient.post('http://jsonplaceholder.typicode.com/todos', {
+		  title: 'foo',
+      body: 'bar',
+      userId: 1
+    }).subscribe( res => {
+      console.log(res);
+      this.resPost = res;
+    } );
 	}
 }
 

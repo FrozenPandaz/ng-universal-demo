@@ -23,7 +23,11 @@ interface HttpOpts {
 export class TransferHttpClient {
   constructor(private http: HttpClient, protected transferState: TransferState) {}
 
-
+  request(method: string, url: string, options: HttpOpts): Observable<any> {
+    return this.getRequestData(method, url, options, (method:string, url:string, options: HttpOpts) => {
+      return this.http.request(method, url, options);
+    });
+  }
   /**
    * Performs a request with `get` http method.
    */
@@ -81,12 +85,6 @@ export class TransferHttpClient {
     });
   }
 
-  request(method: string, url: string, options: HttpOpts): Observable<any> {
-    return this.getRequestData(method, url, options, (method:string, url:string, options: HttpOpts) => {
-      return this.http.request(method, url, options);
-    });
-  }
-
   private getRequestData(method: string, url: string, options: HttpOpts, callback: (method: string, url: string, options: HttpOpts ) => Observable<any>): Observable<any> {
     const key = url + JSON.stringify(options);
 
@@ -118,7 +116,6 @@ export class TransferHttpClient {
     } catch (e) {
       return callback(url, options)
         .map(res => {
-          console.log(res);
           return res;
         })
         .do(data => {
@@ -143,7 +140,7 @@ export class TransferHttpClient {
 
     } catch (e) {
       return callback(uri, body, options)
-        .map(res => res.json())
+        .map(res => res)
         .do(data => {
           this.setCache(key, data);
         });
