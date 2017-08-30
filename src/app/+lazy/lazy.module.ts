@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { PostComponent } from './post/post.component'
 import { TransferHttp } from '../../modules/transfer-http/transfer-http';
+import { TransferHttpClientModule } from '../../modules/transfer-http-client/transfer-http-client.module';
+import { TransferHttpClient } from '../../modules/transfer-http-client/transfer-http-client';
 import { Observable } from 'rxjs/Observable';
 
 interface User {
@@ -28,13 +30,26 @@ interface User {
 			<address>{{user.address.street}}</address>
 		</li>
   	</ul>
+    <hr>
+    <ul>
+      <li *ngFor="let photo of photos">
+        <h3>{{photo.title}}</h3>
+      </li>
+    </ul>
   `
 })
 export class LazyView implements OnInit {
 	users: Observable<Array<User>>;
-	constructor(private http: TransferHttp) { }
+	photos;
+	constructor(private http: TransferHttp, private httpClient: TransferHttpClient) { }
 	ngOnInit(){
 		this.users = this.http.get('http://jsonplaceholder.typicode.com/users').map(res => res);
+		this.httpClient.request('GET', 'http://jsonplaceholder.typicode.com/todos', {
+      responseType: 'json'
+    }).subscribe(res => {
+		  console.log(res);
+		  this.photos = res;
+    });
 	}
 }
 
@@ -44,7 +59,8 @@ export class LazyView implements OnInit {
     RouterModule.forChild([
       { path: '', component: LazyView, pathMatch: 'full'}
     ]),
-    CommonModule
+    CommonModule,
+    TransferHttpClientModule
   ]
 })
 export class LazyModule {
