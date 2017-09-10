@@ -1,0 +1,28 @@
+<h3>I'm lazy</h3>
+<ul>
+  <!--async for http (Observable)-->
+  <li *ngFor="let user of users | async">
+    ({{user.id}}). {{ user.name | uppercase }}
+    <br />
+    <i>{{user.email}} : {{user.phone}}</i>
+    <address>{{user.address.street}}</address>
+  </li>
+</ul>
+<hr>
+<!--<ul>
+  <li *ngFor="let photo of photos">
+    <h3>{{photo.title}}</h3>
+  </li>
+</ul>-->
+<form (submit)="getMusicList($event, term.value)">
+  <label for="term">Term</label>
+  <input id="term" name="term" #term>
+  <button>Get List</button>
+</form>
+<ul *ngIf="music">
+  <li *ngFor="let track of music">
+    <audio controls [src]="track.previewUrl"></audio> <b>{{track.artistName}}</b> - <i>{{track.trackName}}</i>
+    <div><img [src]="track.artworkUrl100" [alt]="track.collectionCensoredName"></div>
+  </li>
+</ul>
+<code>{{todos | json}}</code>

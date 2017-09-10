@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 // import { ConnectionBackend, Http, Request, RequestOptions, RequestOptionsArgs, Response } from '@angular/http';
-import { HttpBackend, HttpClient, HttpHandler, HttpRequest, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpBackend, JsonpClientBackend, HttpClient, HttpHandler, HttpRequest, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { TransferState } from '../transfer-state/transfer-state';
@@ -83,6 +83,29 @@ export class TransferHttpClient {
     return this.getData(url, options, (url: string, options: any) => {
       return this.http.options(url, options);
     });
+  }
+
+  jsonp(url: string, callbackParam: string): Observable<any> {
+    return this.getJsonpData(url, callbackParam, (url: string, callbackParam: string) => {
+      return this.http.jsonp(url, callbackParam);
+    });
+  }
+
+  private getJsonpData(url: string, callbackParam: string, callback: (url: string, callbackParam: string) => Observable<any>): Observable<any> {
+    const key = url;
+
+    return callback(url, callbackParam)
+      .map(res => res);
+      /*.do(data => {
+        this.setCache(key, data);
+      });*/
+    /*try {
+      return this.resolveData(key);
+
+    } catch (e) {
+
+    }*/
+
   }
 
   private getRequestData(method: string, url: string, options: HttpOpts, callback: (method: string, url: string, options: HttpOpts ) => Observable<any>): Observable<any> {

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClientJsonpModule, HttpClient } from '@angular/common/http';
 import { TransferHttpClient } from './transfer-http-client';
 
 @NgModule({
