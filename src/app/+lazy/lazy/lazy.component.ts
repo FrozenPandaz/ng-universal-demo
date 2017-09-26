@@ -19,7 +19,7 @@ interface User {
 @Component({
   selector: 'app-lazy',
   templateUrl: './lazy.component.html',
-  styleUrls: ['./lazy.component.css']
+  styleUrls: ['./lazy.component.scss']
 })
 export class LazyComponent implements OnInit {
   users: Observable<Array<User>>;
@@ -73,7 +73,7 @@ export class LazyComponent implements OnInit {
   getMusicList(event, term): void {
     event.preventDefault();
     this.httpClient.jsonp(`https://itunes.apple.com/search?term=${term}&media=music`, 'callback').subscribe(res => {
-      console.log(res);
+      // console.log(res);
       this.music = res.results;
     });
   }

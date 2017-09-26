@@ -10,9 +10,15 @@ const ScriptExtPlugin = require('script-ext-html-webpack-plugin');
  * This is a client config which should be merged on top of common config
  */
 module.exports = {
-  entry: root('./src/main.browser.ts'),
+  // entry: root('./src/main.browser.ts'),
+  entry: {
+    "client": [root('./src/main.browser.ts')],
+    "styles": [root('./src/styles.scss')]
+  },
   output: {
-    filename: 'client.js'
+    path: root('dist'),
+    filename: '[name].bundle.js',
+    chunkFilename: "[id].chunk.js"
   },
   target: 'web',
   plugins: [
