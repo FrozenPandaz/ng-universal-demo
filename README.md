@@ -18,3 +18,11 @@ npm run server
 
 Based on https://github.com/robwormald/ng-universal-demo
 
+## Webpack config changes
+For adding more style files edit webpack/webpack.client.js: 14
+```js
+entry: {
+    "client": [root('./src/main.browser.ts')],
+    "styles": [root('./src/styles.scss')]
+  }
+```
