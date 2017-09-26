@@ -89,7 +89,9 @@ export class TransferHttp {
 
     } catch (e) {
       return callback(uri, options)
-        .map(res => res.json())
+        .map(res => {
+          return res.json();
+        })
         .do(data => {
           this.setCache(key, data);
         });

@@ -1,0 +1,4 @@
+$body-bg: #0a0;
+body{
+	background-color: transparentize($body-bg, 0.5);
+}

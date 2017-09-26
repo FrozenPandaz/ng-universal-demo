@@ -42,4 +42,4 @@ module.exports = function (options, webpackOptions) {
   }
 
   return configs;
-}
+};

@@ -1,21 +1,18 @@
-import {NgModule, Component} from '@angular/core'
-import {RouterModule} from '@angular/router'
-
-
-@Component({
-  selector: 'lazy-view',
-  template: `<h3>i'm lazy</h3>`
-})
-export class LazyView {}
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common';
+import { PostComponent } from './post/post.component';
+import { TransferHttpModule } from '../../modules/transfer-http/transfer-http.module';
+import { TransferHttpClientModule } from '../../modules/transfer-http-client/transfer-http-client.module';
+import { LazyComponent } from './lazy/lazy.component';
+import { LazyRoutingModule } from './lazy-routing.module';
 
 @NgModule({
-  declarations: [LazyView],
+  declarations: [ PostComponent, LazyComponent],
   imports: [
-    RouterModule.forChild([
-      { path: '', component: LazyView, pathMatch: 'full'}
-    ])
+    CommonModule,
+    LazyRoutingModule,
+    TransferHttpModule,
+    TransferHttpClientModule
   ]
 })
-export class LazyModule {
-
-}
+export class LazyModule { }

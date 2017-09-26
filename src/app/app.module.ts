@@ -1,24 +1,20 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_BASE_HREF, CommonModule } from '@angular/common';
-import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { HomeView } from './home/home-view.component';
-import { TransferHttpModule } from '../modules/transfer-http/transfer-http.module';
-
+import { CoreModule } from './core/core.module';
+import { AppRoutingModule } from './app-routing.module';
+import { HomeModule } from './home/home.module';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    HttpModule,
-    TransferHttpModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeView, pathMatch: 'full'},
-      { path: 'lazy', loadChildren: './+lazy/lazy.module#LazyModule'}
-    ])
+    CoreModule,
+    HomeModule,
+    AppRoutingModule
   ],
-  declarations: [ AppComponent, HomeView ],
+  declarations: [ AppComponent, NotFoundComponent ],
   exports: [ AppComponent ]
 })
 export class AppModule {}
