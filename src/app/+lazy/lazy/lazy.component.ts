@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Meta, Title} from '@angular/platform-browser';
 
 import { TransferHttp } from '../../../modules/transfer-http/transfer-http';
 import { TransferHttpClient } from '../../../modules/transfer-http-client/transfer-http-client';
@@ -27,10 +28,17 @@ export class LazyComponent implements OnInit {
   music;
   constructor(
     private http: TransferHttp,
-    private httpClient: TransferHttpClient
+    private httpClient: TransferHttpClient,
+    private title: Title,
+    private meta: Meta
   ) { }
 
   ngOnInit() {
+    // seo
+    this.title.setTitle('Lazy page');
+    this.meta.updateTag({name: 'description', content: 'Lazy page description'});
+    this.meta.updateTag({name: 'keywords', content: 'Angular Lazy Load Module, Angular 2 , Angular 4 HttpClient, Universal, Angular Universal, Server-side rendering'});
+
     // TransferHttp (Http for server-side rendering) usage
     this.users = this.http.get('http://jsonplaceholder.typicode.com/users').map(res => res);
 
