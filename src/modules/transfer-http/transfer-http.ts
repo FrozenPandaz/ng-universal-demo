@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ConnectionBackend, Http, Request, RequestOptions, RequestOptionsArgs, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import { TransferState } from '../transfer-state/transfer-state';
+import { TransferState, makeStateKey } from '@angular/platform-browser';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -82,7 +82,7 @@ export class TransferHttp {
       url = uri.url
     }
 
-    const key = url + JSON.stringify(options)
+    const key = makeStateKey<any>(url + JSON.stringify(options))
 
     try {
       return this.resolveData(key);
@@ -91,7 +91,7 @@ export class TransferHttp {
       return callback(uri, options)
         .map(res => res.json())
         .do(data => {
-          this.setCache(key, data);
+          this.transferState.set(key, data);
         });
     }
   }
@@ -104,7 +104,7 @@ export class TransferHttp {
       url = uri.url
     }
 
-    const key = url + JSON.stringify(body) + JSON.stringify(options)
+    const key = makeStateKey<any>(url + JSON.stringify(body) + JSON.stringify(options));
 
     try {
 
@@ -114,26 +114,19 @@ export class TransferHttp {
       return callback(uri, body, options)
         .map(res => res.json())
         .do(data => {
-          this.setCache(key, data);
+          this.transferState.set(key, data);
         });
     }
   }
 
   private resolveData(key: string) {
-    const data = this.getFromCache(key);
+    const stateKey = makeStateKey<any>(key);
+    const data = this.transferState.get(stateKey, null);
 
     if (!data) {
       throw new Error();
     }
 
     return Observable.fromPromise(Promise.resolve(data));
-  }
-
-  private setCache(key, data) {
-    return this.transferState.set(key, data);
-  }
-
-  private getFromCache(key): any {
-    return this.transferState.get(key);
   }
 }

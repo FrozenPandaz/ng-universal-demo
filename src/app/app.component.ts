@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { TransferState } from '../modules/transfer-state/transfer-state';
+import { TransferState, makeStateKey } from '@angular/platform-browser';
 
 @Component({
   selector: 'demo-app',
@@ -18,6 +18,6 @@ import { TransferState } from '../modules/transfer-state/transfer-state';
 export class AppComponent implements OnInit {
   constructor(private cache: TransferState) {}
   ngOnInit() {
-    this.cache.set('cached', true);
+    this.cache.set(makeStateKey<boolean>('cached'), true);
   }
 }
