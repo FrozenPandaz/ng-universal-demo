@@ -2,7 +2,7 @@ import 'zone.js/dist/zone-node';
 import 'reflect-metadata';
 import 'rxjs/Rx';
 import * as express from 'express';
-import { platformServer, renderModuleFactory } from '@angular/platform-server';
+import { platformServer, platformDynamicServer, renderModule } from '@angular/platform-server';
 import { ServerAppModule } from './app/server-app.module';
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import { ROUTES } from './routes';
@@ -13,6 +13,14 @@ const app = express();
 const api = new App();
 const port = 8000;
 const baseUrl = `http://localhost:${port}`;
+
+// These should all work
+platformDynamicServer().bootstrapModule(ServerAppModule).then(console.log);
+
+renderModule(ServerAppModule, {
+  document: '<demo-app></demo-app>',
+  url: '/'
+});
 
 app.engine('html', ngExpressEngine({
   bootstrap: ServerAppModule

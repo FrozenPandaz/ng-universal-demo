@@ -1,14 +1,19 @@
 const { root } = require('./helpers');
-const { AngularCompilerPlugin } = require('@ngtools/webpack');
+const { AngularCompilerPlugin, PLATFORM } = require('@ngtools/webpack');
 
 const tsconfigs = {
   client: root('./src/tsconfig.browser.json'),
   server: root('./src/tsconfig.server.json')
 };
 
-const aotTsconfigs = {
-  client: root('./src/tsconfig.browser.json'),
-  server: root('./src/tsconfig.server.aot.json')
+const mainPaths = {
+  client: root('./src/main.browser.ts'),
+  server: root('src/main.server.ts')
+};
+
+const platforms = {
+  client: PLATFORM.Browser,
+  server: PLATFORM.Server
 };
 
 /**
@@ -20,8 +25,10 @@ const aotTsconfigs = {
  */
 function getAotPlugin(platform, aot) {
   return new AngularCompilerPlugin({
-    tsConfigPath: aot ? aotTsconfigs[platform] : tsconfigs[platform],
-    skipCodeGeneration: !aot
+    tsConfigPath: tsconfigs[platform],
+    skipCodeGeneration: !aot,
+    platform: platforms[platform],
+    mainPath: mainPaths[platform]
   });
 }
 
